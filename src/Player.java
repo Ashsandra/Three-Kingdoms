@@ -12,5 +12,7 @@ public class Player {
     this.hp = character.getHp();
   }
 
-
+  public ArrayList<Card> getHand() {
+    return this.hand;
+  }
 }

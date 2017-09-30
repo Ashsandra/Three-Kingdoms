@@ -47,6 +47,7 @@ public class DeckofCards {
     Collections.shuffle(cards);
   }
 
+  // all hand cards, or, lost cards
   public void deal(int cardNum, Player target, ArrayList<Card> allHandCards) {
     for (int num : new int[cardNum]) {
       target.getHand().add(cards.remove(0));
