@@ -9,6 +9,10 @@ public class Character {
         this.name = name;
     }
 
+    String setNmae() {
+        return name;
+    }
+
     int getHp() {
         return hp;
     }
