@@ -8,10 +8,7 @@ public class Character {
         this.maxHp = maxHp;
         this.name = name;
     }
-
-    String setName() {
-        return name;
-    }
+    
 
     int getHp() {
         return hp;
