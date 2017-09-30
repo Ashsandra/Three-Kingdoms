@@ -4,6 +4,8 @@ import java.util.Collections;
 public class DeckofCards {
   private ArrayList<Card> cards;
 
+  // TO-DO: perhaps use linked list instead.
+
   DeckofCards() {
     this.cards = new ArrayList<Card>();
 
@@ -41,6 +43,23 @@ public class DeckofCards {
     cards.add(new Card(Card.Suit.HEART, 12, Card.Type.KILL));
   }
 
+  public void shuffle() {
+    Collections.shuffle(cards);
+  }
+
+  public void deal(int cardNum, Player target, ArrayList<Card> allHandCards) {
+    for (int num : new int[cardNum]) {
+      target.getHand().add(cards.remove(0));
+      if (cards.size() == 0) {
+        cards = new DeckofCards().cards;
+        cards.removeAll(allHandCards);
+        this.shuffle();
+      }
+    }
+
+
+
+  }
 
 
   }
