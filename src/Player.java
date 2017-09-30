@@ -4,12 +4,12 @@ import java.util.ArrayList;
 public class Player {
   private int handLimit;
   private ArrayList<Card> hand;
-  private int blood;
+  private int hp;
 
   Player(Character character) {
-    this.handLimit = character.getBlood();
+    this.handLimit = character.getHp();
     this.hand = new ArrayList<Card>();
-    this.blood = character.getBlood();
+    this.hp = character.getHp();
   }
 
 

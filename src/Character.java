@@ -1,24 +1,24 @@
 public class Character {
-    private int blood;
+    private int hp;
     private String name;
 
-    Character(int blood, String name){
-        this.blood = blood;
+    Character(int hp, String name){
+        this.hp = hp;
         this.name = name;
     }
 
-    public int getBlood() {
-        return blood;
+    public int getHp() {
+        return hp;
     }
 
     void hurt() {
-        blood--;
-        System.out.println(this.name + "is hurt! Cries! The current blood of" + this.name + "is" + this.blood);
+        hp--;
+        System.out.println(this.name + "is hurt! Cries! The current HP of" + this.name + "is" + this.hp);
     }
 
     void recover() {
-        blood ++;
-        System.out.println(this.name +"recovers one blood");
+        hp ++;
+        System.out.println(this.name +"recovers one HP");
     }
 
 
