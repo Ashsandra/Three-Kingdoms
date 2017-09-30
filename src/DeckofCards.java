@@ -40,7 +40,7 @@ public class DeckofCards {
     // Diamond Peach
     cards.add(new Card(Card.Suit.HEART, 12, Card.Type.KILL));
   }
-  
+
 
 
   }
