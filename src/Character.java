@@ -11,6 +11,10 @@ public class Character {
         blood = initBlood;
     }
 
+    public int getBlood() {
+        return blood;
+    }
+
     void hurt() {
         blood--;
         System.out.println(this.name + "is hurt! Cries! The current blood of" + this.name + "is" + this.blood);
