@@ -7,10 +7,6 @@ public class Character {
         this.name = name;
     }
 
-    void setBlood(int initBlood){
-        blood = initBlood;
-    }
-
     public int getBlood() {
         return blood;
     }
