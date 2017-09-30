@@ -9,7 +9,7 @@ public class Character {
         this.name = name;
     }
 
-    String setNmae() {
+    String setName() {
         return name;
     }
 
