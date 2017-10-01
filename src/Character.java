@@ -1,12 +1,21 @@
+import java.util.ArrayList;
+import java.util.Scanner;
+
 public class Character {
     private int hp;
     private int maxHp;
     private String name;
+    Player player;
+    Card card;
 
-    Character(int maxHp, String name){
-        this.hp = maxHp;
+    Character(int hp, int maxHp, String name){
+        this.hp = hp;
         this.maxHp = maxHp;
         this.name = name;
+    }
+
+    String setName() {
+        return name;
     }
 
     int getHp() {
@@ -21,25 +30,48 @@ public class Character {
         return maxHp - hp;
     }
 
-    boolean isWounded() {
+    boolean isWounded () {
         return getLosthp() > 0;
-    }
+        }
 
-    boolean isDead() {
+    boolean isDead () {
         return hp == 0;
     }
 
-    boolean isAlive() {
+    boolean isAlive () {
         return ! isDead();
     }
 
-    void harm() {
+    void harm () {
         hp --;
         System.out.println(this.name + "受到1点伤害，体力值为" + hp);
     }
 
-    void heal() {
+    void heal () {
         hp ++;
         System.out.println(this.name + "回复一点体力，体力值为" + hp);
     }
-}
+
+    void dying() {
+        Scanner scanner = new Scanner(System.in);
+        if (hp == 0) {
+            System.out.println (this.name +"属于濒死状态，是否使用一个桃");
+            System.out.println("(1)--确定");
+            System.out.println("(2)--取消");
+            int selection = scanner.nextInt();
+
+            if (selection == 1 && player.hasCard(card)){
+                isAlive();
+                System.out.println("you are alive!");
+            }
+            if (selection == 2){
+                isDead();
+                System.out.println("you are dead!");
+            }
+
+
+        }
+    }
+
+    }
+
