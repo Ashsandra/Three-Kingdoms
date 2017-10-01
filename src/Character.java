@@ -8,8 +8,8 @@ public class Character {
     Player player;
     Card card;
 
-    Character(int hp, int maxHp, String name){
-        this.hp = hp;
+    Character(int maxHp, String name){
+        this.hp = maxHp;
         this.maxHp = maxHp;
         this.name = name;
     }
