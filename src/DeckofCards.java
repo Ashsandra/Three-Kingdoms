@@ -48,6 +48,7 @@ public class DeckofCards {
   }
 
   // all hand cards, or, lost cards
+  // TO BE IMPROVED
   public void deal(int cardNum, Player target, ArrayList<Card> allHandCards) {
     for (int num : new int[cardNum]) {
       target.getHand().add(cards.remove(0));
