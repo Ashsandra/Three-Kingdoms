@@ -32,7 +32,7 @@ public class DeckofCards {
     }
     // Diamond Dodge
     for (int rank : new int[] {2, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 11}) {
-      cards.add(new Card(Card.Suit.DIAMOND, rank, Card.Type.KILL));
+      cards.add(new Card(Card.Suit.DIAMOND, rank, Card.Type.DODGE));
     }
 
     // Heart Peach
@@ -40,7 +40,7 @@ public class DeckofCards {
       cards.add(new Card(Card.Suit.HEART, rank, Card.Type.PEACH));
     }
     // Diamond Peach
-    cards.add(new Card(Card.Suit.HEART, 12, Card.Type.KILL));
+    cards.add(new Card(Card.Suit.HEART, 12, Card.Type.PEACH));
   }
 
   public void shuffle() {
@@ -49,19 +49,13 @@ public class DeckofCards {
 
   // all hand cards, or, lost cards
   // TO BE IMPROVED
-  public void draw(int cardNum, Player target, ArrayList<Card> allHandCards) {
+  public void deal(int cardNum, Player target, ArrayList<Card> discardedCards) {
     for (int num : new int[cardNum]) {
       target.getHand().add(cards.remove(0));
       if (cards.size() == 0) {
-        cards = new DeckofCards().cards;
-        cards.removeAll(allHandCards);
+        cards = discardedCards;
         this.shuffle();
       }
     }
-
-
-
   }
-
-
-  }
+}

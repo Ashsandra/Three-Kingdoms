@@ -1,8 +1,22 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 
 public class ThreeKingdoms {
+  private Player currentPlayer;
+  private ArrayList<Card> discardedCards;
+  private DeckofCards deck;
+
+  private Player player1 = new Player(new Character(3, "Player 1"));
+  private Player player2 = new Player(new Character(3, "Player 2"));
+
+
+  ThreeKingdoms() {
+    currentPlayer = player1;
+    discardedCards = new ArrayList<Card>();
+    deck = new DeckofCards();
+  }
 
   // used to read text from the user
   private static Scanner cin = new Scanner(System.in, UTF_8.name());
@@ -11,4 +25,179 @@ public class ThreeKingdoms {
     return cin.nextLine();
   }
 
+  public void changePlayer() {
+    if (currentPlayer == player1) {
+      currentPlayer = player2;
+    } else {
+      currentPlayer = player1;
+    }
+  }
+
+  public void draw(int numofCards) {
+    deck.deal(numofCards, currentPlayer, discardedCards);
+    System.out.println("Hello " +
+        currentPlayer.getName() +
+        ", you currently have these cards: " +
+        currentPlayer.getHand());
+  }
+
+  private void instructions() {
+    System.out.println(currentPlayer.getName() + ", you currently have these cards: " + currentPlayer.getHand());
+    System.out.println("Please enter the index of the card you wish to play.");
+    System.out.println("1 - the leftmost card");
+    System.out.println(currentPlayer.getHand().size() + " - the rightmost card");
+  }
+
+  public Card.Type playACard() {
+    System.out.println(currentPlayer.getName() + ", it's your round! Would you like to play a card? (Y/N)");
+    if (getAnswer().charAt(0) == 'Y') {
+      instructions();
+      String index = getAnswer();
+      if (!(currentPlayer.check(index) == Card.Type.DODGE)) {
+        return currentPlayer.play(getAnswer());
+      } else {
+        System.out.println("Don't play a DODGE when you don't need to!");
+        System.out.println("Would you like to choose another card? (Y/N)");
+        char again = getAnswer().charAt(0);
+        if (again == 'Y') {
+          playACard();
+        }
+        return null;
+      }
+    } else {
+      return null;
+    }
+  }
+
+  public boolean playACard(String type) {
+    instructions();
+    String answer = getAnswer();
+    String expected = currentPlayer.getHand().get(Integer.parseInt(answer) - 1).getType().toString();
+    if (expected == type) {
+      currentPlayer.play(getAnswer());
+      return true;
+    } else {
+      System.out.println("Please play a" + expected);
+      System.out.println("Would you like to choose another card? (Y/N)");
+      char again = getAnswer().charAt(0);
+      if (again == 'Y') {
+        playACard(type);
+      }
+      return false;
+    }
+  }
+
+  public boolean death() {
+    System.out.println(currentPlayer.getName() + "属于濒死状态");
+    changePlayer();
+    System.out.println(currentPlayer.getName() + "你是否使用一个桃?");
+    System.out.println("(1)--确定");
+    System.out.println("(2)--取消");
+    int selection = Integer.parseInt(getAnswer());
+    if (selection == 1) {
+      if (currentPlayer.hasCard(Card.Type.PEACH)){
+        changePlayer();
+        currentPlayer.heal();
+        System.out.println(currentPlayer.getName() + ", you are alive!");
+        return false;
+      } else {
+        System.out.println("Unfortunately, you do not have a PEACH.");
+        changePlayer();
+        System.out.println(currentPlayer.getName() + ", unfortunately, you are dead.");
+        changePlayer();
+        return true;
+      }
+      } else {
+      changePlayer();
+      System.out.println(currentPlayer.getName() + ", unfortunately, you are dead.");
+      changePlayer();
+      return true;
+    }
+  }
+
+  public void discard(int index) {
+    discardedCards.add(currentPlayer.getHand().remove(index - 1));
+  }
+
+
+  /**
+   * The main program for the Three Kingdoms game.
+   */
+  public static void main(String[] args) {
+    // start game
+    ThreeKingdoms game = new ThreeKingdoms();
+    System.out.println("Welcome to the Three Kingdoms game!");
+
+    // input names
+    System.out.println("Please enter the name of the first player: ");
+    game.player1.setName(getAnswer());
+    System.out.println("Thank you! Now please enter the name of the second player: ");
+    game.player2.setName(getAnswer());
+    System.out.println("Alrighty! We shall start the game!");
+
+    // deal 4 cards to each player
+    game.deck.shuffle();
+    game.draw(4);
+    game.changePlayer();
+    game.draw(4);
+    game.changePlayer();
+
+
+    while (true) {
+      // draw 2 cards
+      game.draw(2);
+
+      // play a card
+      Card.Type card = game.playACard();
+
+      // kill
+      if (card == Card.Type.KILL) {
+        game.changePlayer();
+        System.out.println("\n\n" +
+            game.currentPlayer.getName() +
+            ", the other player used a KILL towards you! Would you like to play a DODGE? (Y/N)");
+        if (getAnswer().charAt(0) == 'Y') {
+          if (!game.playACard("DODGE")) {
+            game.currentPlayer.harm();
+            if (game.currentPlayer.getHp() == 0) {
+              if (game.death()) {
+                break;
+              }
+            }
+          } else {
+            System.out.println("You've successfully dodged the KILL!");
+          }
+        } else {
+          System.out.println("You chose not to play a DODGE.");
+          game.currentPlayer.harm();
+          if (game.currentPlayer.getHp() == 0) {
+            if (game.death()) {
+              break;
+            }
+          }
+        }
+        game.changePlayer();
+      } else if (card == Card.Type.PEACH) {
+        // peach
+        game.currentPlayer.heal();
+        game.playACard();
+      } else {
+        System.out.println(game.currentPlayer.getName() + ", you chose not to play a card.");
+      }
+
+      // Discard cards
+      while (game.currentPlayer.getHand().size() > game.currentPlayer.getHandLimit()) {
+        System.out.println(game.currentPlayer.getName() + ", you have " + game.currentPlayer.getHand().size() + " cards " +
+            "while the limit is " + game.currentPlayer.getHandLimit() + ", so please discard " +
+            (game.currentPlayer.getHand().size() - game.currentPlayer.getHandLimit()) + " cards.");
+        System.out.println("You currently have these cards: " + game.currentPlayer.getHand());
+        System.out.println("Please indicate the index of the card you wish to discard.");
+        game.discard(Integer.parseInt(getAnswer()));
+      }
+      game.changePlayer();
+    }
+
+    // game over, ask if play again
+    System.out.println("Game Over!" + game.currentPlayer.getName() + ", congratulations, you won!");
+  }
 }

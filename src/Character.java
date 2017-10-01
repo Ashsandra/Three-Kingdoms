@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Character {
@@ -13,7 +14,15 @@ public class Character {
         this.name = name;
     }
 
-    int getHp() {
+    void setName(String name) {
+        this.name = name;
+    }
+
+  public String getName() {
+    return name;
+  }
+
+  int getHp() {
         return hp;
     }
 
@@ -25,44 +34,9 @@ public class Character {
         return maxHp - hp;
     }
 
-    boolean isWounded() {
+    boolean isWounded () {
         return getLosthp() > 0;
-    }
-
-    boolean isDead() {
-        return hp == 0;
-    }
-
-    boolean isAlive() {
-        return ! isDead();
-    }
-
-    void harm() {
-        hp --;
-        System.out.println(this.name + "受到1点伤害，体力值为" + hp);
-    }
-
-    void heal() {
-        hp ++;
-        System.out.println(this.name + "回复一点体力，体力值为" + hp);
-    }
-
-    void dying() {
-        Scanner scanner = new Scanner(System.in);
-        if (hp == 0) {
-            System.out.println(this.name + "处于濒死状态，是否出一个桃");
-            System.out.println("(1)-- Yes");
-            System.out.println("(2)--No");
-            int selection = scanner.nextInt();
-            if (selection == 1 && player.hasCard(Card.Type.PEACH)){
-                isAlive();
-                System.out.println("game continues!");
-                if (selection == 2){
-                    isDead();
-                    System.out.println("game ends");
-                }
-            }
-
         }
+
     }
-}
+

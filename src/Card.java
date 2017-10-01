@@ -32,5 +32,5 @@ public class Card {
 
   public boolean isBlack() {return this.suit == Suit.HEART | this.suit == Suit.DIAMOND;}
 
-
+  public String toString() {return type.toString();}
 }
