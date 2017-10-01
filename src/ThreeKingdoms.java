@@ -67,8 +67,7 @@ public class ThreeKingdoms {
       System.out.println("Please enter the index of the card you wish to play.");
       System.out.println("1 - the leftmost card");
       System.out.println("3 - the rightmost card");
-      String response = getAnswer();
-      Card.Type card = game.currentPlayer.play(response);
+      Card.Type card = game.currentPlayer.play(getAnswer());
 
       // kill
       if (card == Card.Type.KILL) {
