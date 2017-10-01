@@ -14,11 +14,15 @@ public class Character {
         this.name = name;
     }
 
-    String setName() {
-        return name;
+    void setName(String name) {
+        this.name = name;
     }
 
-    int getHp() {
+  public String getName() {
+    return name;
+  }
+
+  int getHp() {
         return hp;
     }
 
