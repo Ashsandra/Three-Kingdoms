@@ -1,48 +1,25 @@
 public class Character {
-    private int hp;
-    private int maxHp;
+    private int blood;
     private String name;
 
-    Character(int hp, int maxHp, String name){
-        this.hp = hp;
-        this.maxHp = maxHp;
+    Character(int blood, String name){
+        this.blood = blood;
         this.name = name;
     }
 
-
-    int getHp() {
-        return hp;
+    public int getBlood() {
+        return blood;
     }
 
-    int getMaxHp() {
-        return maxHp;
+    void hurt() {
+        blood--;
+        System.out.println(this.name + "is hurt! Cries! The current blood of" + this.name + "is" + this.blood);
     }
 
-    int getLosthp() {
-        return maxHp - hp;
+    void recover() {
+        blood ++;
+        System.out.println(this.name +"recovers one blood");
     }
 
-    boolean isWounded () {
-        return getLosthp() > 0;
-        }
 
-    boolean isDead () {
-        return hp == 0;
-    }
-
-    boolean isAlive () {
-        return ! isDead();
-    }
-
-    void harm () {
-        hp --;
-        System.out.println(this.name + "受到1点伤害，体力值为" + hp);
-    }
-
-    void heal () {
-        hp ++;
-        System.out.println(this.name + "回复一点体力，体力值为" + hp);
-    }
-
-    }
-
+}
