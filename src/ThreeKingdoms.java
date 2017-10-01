@@ -94,14 +94,22 @@ public class ThreeKingdoms {
     System.out.println("(1)--确定");
     System.out.println("(2)--取消");
     int selection = Integer.parseInt(getAnswer());
-    if (selection == 1 && currentPlayer.hasCard(Card.Type.PEACH)) {
+    if (selection == 1) {
+      if (currentPlayer.hasCard(Card.Type.PEACH)){
+        changePlayer();
+        currentPlayer.heal();
+        System.out.println(currentPlayer.getName() + ", you are alive!");
+        return false;
+      } else {
+        System.out.println("Unfortunately, you do not have a PEACH.");
+        changePlayer();
+        System.out.println(currentPlayer.getName() + ", unfortunately, you are dead.");
+        changePlayer();
+        return true;
+      }
+      } else {
       changePlayer();
-      currentPlayer.heal();
-      System.out.println(currentPlayer.getName() + ", you are alive!");
-      return false;
-    } else {
-      changePlayer();
-      System.out.println(currentPlayer.getName() + ", you are dead!");
+      System.out.println(currentPlayer.getName() + ", unfortunately, you are dead.");
       changePlayer();
       return true;
     }
@@ -138,7 +146,9 @@ public class ThreeKingdoms {
       // kill
       if (card == Card.Type.KILL) {
         game.changePlayer();
-        System.out.println("\n\n" + game.currentPlayer.getName() + ", the other player used a KILL towards you! Would you like to play a DODGE? (Y/N)");
+        System.out.println("\n\n" +
+            game.currentPlayer.getName() +
+            ", the other player used a KILL towards you! Would you like to play a DODGE? (Y/N)");
         if (getAnswer().charAt(0) == 'Y') {
           if (!game.playACard("DODGE")) {
             game.currentPlayer.harm();
@@ -156,17 +166,21 @@ public class ThreeKingdoms {
           if (game.currentPlayer.getHp() == 0) {
             if (game.death()) {
               break;
+            }
+          }
         }
         game.changePlayer();
+      } else if (card == Card.Type.PEACH) {
+        // peach
+        game.currentPlayer.heal();
+        game.playACard();
       } else {
-          // peach
-          game.currentPlayer.heal();
-          game.playACard();
-        }
-        game.changePlayer();
+        System.out.println(game.currentPlayer.getName() + ", you chose not to play a card.");
       }
+      game.changePlayer();
+    }
 
     // game over, ask if play again
-    System.out.println("Game Over!" + game.currentPlayer + ", congratulations, you won!");
+    System.out.println("Game Over!" + game.currentPlayer.getName() + ", congratulations, you won!");
   }
 }
