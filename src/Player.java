@@ -15,4 +15,12 @@ public class Player {
   public ArrayList<Card> getHand() {
     return this.hand;
   }
+
+  public boolean hasCard(Card card) {
+    return this.hand.contains(card);
+  }
+
+  public void play(Card card) {
+    
+  }
 }
