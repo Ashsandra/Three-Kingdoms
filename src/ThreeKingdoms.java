@@ -138,20 +138,30 @@ public class ThreeKingdoms {
       // kill
       if (card == Card.Type.KILL) {
         game.changePlayer();
-        System.out.println("The other player used a KILL towards you! Play a DODGE!");
-        if (!game.playACard("DODGE")) {
+        System.out.println("\n\n" + game.currentPlayer.getName() + ", the other player used a KILL towards you! Would you like to play a DODGE? (Y/N)");
+        if (getAnswer().charAt(0) == 'Y') {
+          if (!game.playACard("DODGE")) {
+            game.currentPlayer.harm();
+            if (game.currentPlayer.getHp() == 0) {
+              if (game.death()) {
+                break;
+              }
+            }
+          } else {
+            System.out.println("You've successfully dodged the KILL!");
+          }
+        } else {
+          System.out.println("You chose not to play a DODGE.");
           game.currentPlayer.harm();
           if (game.currentPlayer.getHp() == 0) {
             if (game.death()) {
               break;
-            }
-          }
-        } else {
-          System.out.println("You've successfully dodged the KILL!");
         }
+        game.changePlayer();
       } else {
           // peach
           game.currentPlayer.heal();
+          game.playACard();
         }
         game.changePlayer();
       }
