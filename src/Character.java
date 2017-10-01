@@ -38,44 +38,5 @@ public class Character {
         return getLosthp() > 0;
         }
 
-    boolean isDead () {
-        return hp == 0;
-    }
-
-    boolean isAlive () {
-        return ! isDead();
-    }
-
-    void harm () {
-        hp --;
-        System.out.println(this.name + "受到1点伤害，体力值为" + hp);
-    }
-
-    void heal () {
-        hp ++;
-        System.out.println(this.name + "回复一点体力，体力值为" + hp);
-    }
-
-    void dying() {
-        Scanner scanner = new Scanner(System.in);
-        if (hp == 0) {
-            System.out.println (this.name +"属于濒死状态，是否使用一个桃");
-            System.out.println("(1)--确定");
-            System.out.println("(2)--取消");
-            int selection = scanner.nextInt();
-
-            if (selection == 1 && player.hasCard(card)){
-                isAlive();
-                System.out.println("you are alive!");
-            }
-            if (selection == 2){
-                isDead();
-                System.out.println("you are dead!");
-            }
-
-
-        }
-    }
-
     }
 

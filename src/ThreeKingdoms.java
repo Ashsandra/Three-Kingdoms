@@ -1,3 +1,4 @@
+import javax.sound.midi.SysexMessage;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -16,7 +17,6 @@ public class ThreeKingdoms {
     currentPlayer = player1;
     lostCards = new ArrayList<Card>();
     deck = new DeckofCards();
-
   }
 
   // used to read text from the user
@@ -36,7 +36,10 @@ public class ThreeKingdoms {
 
   public void draw(int numofCards) {
     deck.deal(numofCards, currentPlayer, lostCards);
-    System.out.println("Hello " + currentPlayer.getName() + ", you currently have these cards: " + currentPlayer.getHand());
+    System.out.println("Hello " +
+        currentPlayer.getName() +
+        ", you currently have these cards: " +
+        currentPlayer.getHand());
   }
 
   private void instructions() {
@@ -49,19 +52,19 @@ public class ThreeKingdoms {
   public Card.Type playACard() {
     System.out.println(currentPlayer.getName() + ", it's your round! Would you like to play a card? (Y/N)");
     if (getAnswer() == "Y") {
-    instructions();
-    String index = getAnswer();
-    if (!(currentPlayer.check(index) == Card.Type.DODGE)) {
-      return currentPlayer.play(getAnswer());
-    } else {
-      System.out.println("Don't play a DODGE when you don't need to!");
-      System.out.println("Would you like to choose another card? (Y/N)");
-      String again = getAnswer();
-      if (again == "Y") {
-        playACard();
+      instructions();
+      String index = getAnswer();
+      if (!(currentPlayer.check(index) == Card.Type.DODGE)) {
+        return currentPlayer.play(getAnswer());
+      } else {
+        System.out.println("Don't play a DODGE when you don't need to!");
+        System.out.println("Would you like to choose another card? (Y/N)");
+        String again = getAnswer();
+        if (again == "Y") {
+          playACard();
+        }
+        return null;
       }
-      return null;
-    }
     } else {
       return null;
     }
@@ -80,11 +83,31 @@ public class ThreeKingdoms {
       String again = getAnswer();
       if (again == "Y") {
         playACard(type);
-      } else {
-        return false;
       }
+      return false;
     }
   }
+
+  public boolean death() {
+    System.out.println(currentPlayer.getName() + "属于濒死状态");
+    changePlayer();
+    System.out.println(currentPlayer.getName() + "你是否使用一个桃?");
+    System.out.println("(1)--确定");
+    System.out.println("(2)--取消");
+    int selection = Integer.parseInt(getAnswer());
+    if (selection == 1 && currentPlayer.hasCard(Card.Type.PEACH)) {
+      changePlayer();
+      currentPlayer.heal();
+      System.out.println(currentPlayer.getName() + ", you are alive!");
+      return false;
+    } else {
+      changePlayer();
+      System.out.println(currentPlayer.getName() + ", you are dead!");
+      changePlayer();
+      return true;
+    }
+  }
+
 
   /**
    * The main program for the Three Kingdoms game.
@@ -118,16 +141,20 @@ public class ThreeKingdoms {
         System.out.println("The other player used a KILL towards you! Play a DODGE!");
         if (!game.playACard("DODGE")) {
           game.currentPlayer.harm();
+          if (game.currentPlayer.getHp() == 0) {
+            if (game.death()) {
+              break;
+            }
+          }
+        } else {
+          // peach
+          game.currentPlayer.heal();
         }
-      } else if (card == Card.Type.DODGE) {
-        // dodge
-
-      } else {
-        // peach
-
+        game.changePlayer();
       }
-
     }
 
+    // game over, ask if play again
+    System.out.println("Game Over!" + game.currentPlayer + ", congratulations, you won!");
   }
 }
