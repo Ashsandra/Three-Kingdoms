@@ -3,14 +3,10 @@ public class Character {
     private int maxHp;
     private String name;
 
-    Character(int hp, int maxHp, String name){
-        this.hp = hp;
+    Character(int maxHp, String name){
+        this.hp = maxHp;
         this.maxHp = maxHp;
         this.name = name;
-    }
-
-    String setName() {
-        return name;
     }
 
     int getHp() {
