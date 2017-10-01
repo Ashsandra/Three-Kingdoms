@@ -20,7 +20,14 @@ public class Player {
     return this.hand.contains(card);
   }
 
-  public void play(Card card) {
-    
+  public Card.Type play(Card card) {
+    if (!hand.contains(card)) {
+      System.out.println("Please only play a card that you have :)");
+      return null;
+    }
+
+    System.out.println("You've played a " + card.getType());
+    hand.remove(card);
+    return card.getType();
   }
 }
