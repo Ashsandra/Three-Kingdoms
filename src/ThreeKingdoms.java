@@ -5,7 +5,7 @@ import static java.nio.charset.StandardCharsets.UTF_8;
 
 public class ThreeKingdoms {
   private Player currentPlayer;
-  private ArrayList<Card> lostCards;
+  private ArrayList<Card> discardedCards;
   private DeckofCards deck;
 
   private Player player1 = new Player(new Character(3, "Player 1"));
@@ -14,7 +14,7 @@ public class ThreeKingdoms {
 
   ThreeKingdoms() {
     currentPlayer = player1;
-    lostCards = new ArrayList<Card>();
+    discardedCards = new ArrayList<Card>();
     deck = new DeckofCards();
   }
 
@@ -34,7 +34,7 @@ public class ThreeKingdoms {
   }
 
   public void draw(int numofCards) {
-    deck.deal(numofCards, currentPlayer, lostCards);
+    deck.deal(numofCards, currentPlayer, discardedCards);
     System.out.println("Hello " +
         currentPlayer.getName() +
         ", you currently have these cards: " +
@@ -115,6 +115,10 @@ public class ThreeKingdoms {
     }
   }
 
+  public void discard(int index) {
+    discardedCards.add(currentPlayer.getHand().remove(index - 1));
+  }
+
 
   /**
    * The main program for the Three Kingdoms game.
@@ -140,6 +144,9 @@ public class ThreeKingdoms {
 
 
     while (true) {
+      // draw 2 cards
+      game.draw(2);
+
       // play a card
       Card.Type card = game.playACard();
 
@@ -176,6 +183,16 @@ public class ThreeKingdoms {
         game.playACard();
       } else {
         System.out.println(game.currentPlayer.getName() + ", you chose not to play a card.");
+      }
+
+      // Discard cards
+      while (game.currentPlayer.getHand().size() > game.currentPlayer.getHandLimit()) {
+        System.out.println(game.currentPlayer.getName() + ", you have " + game.currentPlayer.getHand().size() + " cards " +
+            "while the limit is " + game.currentPlayer.getHandLimit() + ", so please discard " +
+            (game.currentPlayer.getHand().size() - game.currentPlayer.getHandLimit()) + " cards.");
+        System.out.println("You currently have these cards: " + game.currentPlayer.getHand());
+        System.out.println("Please indicate the index of the card you wish to discard.");
+        game.discard(Integer.parseInt(getAnswer()));
       }
       game.changePlayer();
     }

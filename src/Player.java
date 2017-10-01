@@ -24,6 +24,8 @@ public class Player {
     return this.hand;
   }
 
+  public int getHandLimit() {return handLimit;}
+
   public boolean hasCard(Card.Type type) {
     for (Card card : hand) {
       if (card.getType() == type) {
@@ -71,4 +73,5 @@ public class Player {
     hand.remove(card);
     return card.getType();
   }
+
 }
