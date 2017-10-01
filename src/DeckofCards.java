@@ -52,8 +52,6 @@ public class DeckofCards {
   public void deal(int cardNum, Player target, ArrayList<Card> allHandCards) {
     for (int num : new int[cardNum]) {
       target.getHand().add(cards.remove(0));
-      System.out.println(cards.size() + "cards left");
-
       if (cards.size() == 0) {
         cards = new DeckofCards().cards;
         cards.removeAll(allHandCards);

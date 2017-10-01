@@ -126,6 +126,7 @@ public class ThreeKingdoms {
     System.out.println("Alrighty! We shall start the game!");
 
     // deal 4 cards to each player
+    game.deck.shuffle();
     game.draw(4);
     game.changePlayer();
     game.draw(4);
