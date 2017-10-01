@@ -16,16 +16,18 @@ public class Player {
     return this.hand;
   }
 
-  public boolean hasCard(Card card) {
-    return this.hand.contains(card);
+  public boolean hasCard(Card.Type type) {
+    for (Card card : hand) {
+      if (card.getType() == type) {
+        return true;
+      }
+    }
+    return false;
   }
 
-  public Card.Type play(Card card) {
-    if (!hand.contains(card)) {
-      System.out.println("Please only play a card that you have :)");
-      return null;
-    }
 
+  public Card.Type play(int index) {
+    Card card = hand.get(index - 1);
     System.out.println("You've played a " + card.getType());
     hand.remove(card);
     return card.getType();
