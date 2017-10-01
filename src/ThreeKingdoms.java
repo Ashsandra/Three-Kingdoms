@@ -51,7 +51,8 @@ public class ThreeKingdoms {
 
   public Card.Type playACard() {
     System.out.println(currentPlayer.getName() + ", it's your round! Would you like to play a card? (Y/N)");
-    if (getAnswer() == "Y") {
+    String answer = getAnswer();
+    if (answer == "Y") {
       instructions();
       String index = getAnswer();
       if (!(currentPlayer.check(index) == Card.Type.DODGE)) {
