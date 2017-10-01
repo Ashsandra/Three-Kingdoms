@@ -42,5 +42,4 @@ public class Character {
         hp ++;
         System.out.println(this.name + "回复一点体力，体力值为" + hp);
     }
-
 }
