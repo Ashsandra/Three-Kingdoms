@@ -39,6 +39,37 @@ public class ThreeKingdoms {
     System.out.println("Hello " + currentPlayer.getName() + ", you currently have these cards: " + currentPlayer.getHand());
   }
 
+  private void instructions() {
+    System.out.println(currentPlayer.getName() + ", you currently have these cards: " + currentPlayer.getHand());
+    System.out.println("Please enter the index of the card you wish to play.");
+    System.out.println("1 - the leftmost card");
+    System.out.println("3 - the rightmost card");
+  }
+
+  public Card.Type playACard() {
+    instructions();
+    return currentPlayer.play(getAnswer());
+  }
+
+  public boolean playACard(String type) {
+    instructions();
+    String answer = getAnswer();
+    String expected = currentPlayer.getHand().get(Integer.parseInt(answer) - 1).getType().toString();
+    if (expected == type) {
+      currentPlayer.play(getAnswer());
+      return true;
+    } else {
+      System.out.println("Please play a" + expected);
+      System.out.println("Would you like to choose another card? (Y/N)");
+      String again = getAnswer();
+      if (again == "Y") {
+        playACard(type);
+      } else {
+        return false;
+      }
+    }
+  }
+
   /**
    * The main program for the Three Kingdoms game.
    */
@@ -63,16 +94,15 @@ public class ThreeKingdoms {
 
     while (true) {
       // play a card
-      System.out.println(game.currentPlayer.getName() + ", you currently have these cards: " + game.currentPlayer.getHand());
-      System.out.println("Please enter the index of the card you wish to play.");
-      System.out.println("1 - the leftmost card");
-      System.out.println("3 - the rightmost card");
-      Card.Type card = game.currentPlayer.play(getAnswer());
+      Card.Type card = game.playACard();
 
       // kill
       if (card == Card.Type.KILL) {
         game.changePlayer();
-        System.out.println();
+        System.out.println("The other player used a KILL towards you! Play a DODGE!");
+        if (!game.playACard("DODGE")) {
+          game.currentPlayer.harm();
+        }
       } else if (card == Card.Type.DODGE) {
         // dodge
 
