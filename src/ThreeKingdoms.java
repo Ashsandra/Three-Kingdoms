@@ -1,4 +1,3 @@
-import javax.sound.midi.SysexMessage;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -46,13 +45,12 @@ public class ThreeKingdoms {
     System.out.println(currentPlayer.getName() + ", you currently have these cards: " + currentPlayer.getHand());
     System.out.println("Please enter the index of the card you wish to play.");
     System.out.println("1 - the leftmost card");
-    System.out.println("3 - the rightmost card");
+    System.out.println(currentPlayer.getHand().size() + " - the rightmost card");
   }
 
   public Card.Type playACard() {
     System.out.println(currentPlayer.getName() + ", it's your round! Would you like to play a card? (Y/N)");
-    String answer = getAnswer();
-    if (answer == "Y") {
+    if (getAnswer().charAt(0) == 'Y') {
       instructions();
       String index = getAnswer();
       if (!(currentPlayer.check(index) == Card.Type.DODGE)) {
@@ -60,8 +58,8 @@ public class ThreeKingdoms {
       } else {
         System.out.println("Don't play a DODGE when you don't need to!");
         System.out.println("Would you like to choose another card? (Y/N)");
-        String again = getAnswer();
-        if (again == "Y") {
+        char again = getAnswer().charAt(0);
+        if (again == 'Y') {
           playACard();
         }
         return null;
@@ -81,8 +79,8 @@ public class ThreeKingdoms {
     } else {
       System.out.println("Please play a" + expected);
       System.out.println("Would you like to choose another card? (Y/N)");
-      String again = getAnswer();
-      if (again == "Y") {
+      char again = getAnswer().charAt(0);
+      if (again == 'Y') {
         playACard(type);
       }
       return false;
@@ -149,12 +147,14 @@ public class ThreeKingdoms {
             }
           }
         } else {
+          System.out.println("You've successfully dodged the KILL!");
+        }
+      } else {
           // peach
           game.currentPlayer.heal();
         }
         game.changePlayer();
       }
-    }
 
     // game over, ask if play again
     System.out.println("Game Over!" + game.currentPlayer + ", congratulations, you won!");
