@@ -47,8 +47,24 @@ public class ThreeKingdoms {
   }
 
   public Card.Type playACard() {
+    System.out.println(currentPlayer.getName() + ", it's your round! Would you like to play a card? (Y/N)");
+    if (getAnswer() == "Y") {
     instructions();
-    return currentPlayer.play(getAnswer());
+    String index = getAnswer();
+    if (!(currentPlayer.check(index) == Card.Type.DODGE)) {
+      return currentPlayer.play(getAnswer());
+    } else {
+      System.out.println("Don't play a DODGE when you don't need to!");
+      System.out.println("Would you like to choose another card? (Y/N)");
+      String again = getAnswer();
+      if (again == "Y") {
+        playACard();
+      }
+      return null;
+    }
+    } else {
+      return null;
+    }
   }
 
   public boolean playACard(String type) {
