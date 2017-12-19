@@ -35,31 +35,31 @@ public class ThreeKingdoms {
 
   public void draw(int numofCards) {
     deck.deal(numofCards, currentPlayer, discardedCards);
-    System.out.println("Hello " +
-        currentPlayer.getName() +
-        ", you currently have these cards: " +
-        currentPlayer.getHand());
+    System.out.println("你好， " +
+            currentPlayer.getName() +
+            ", 你目前的手牌为 " +
+            currentPlayer.getHand());
   }
 
   private void instructions() {
-    System.out.println(currentPlayer.getName() + ", you currently have these cards: " + currentPlayer.getHand());
-    System.out.println("Please enter the index of the card you wish to play.");
-    System.out.println("1 - the leftmost card");
-    System.out.println(currentPlayer.getHand().size() + " - the rightmost card");
+    System.out.println(currentPlayer.getName() + ", 你目前的手牌为 " + currentPlayer.getHand());
+    System.out.println("请输入你要打出的卡牌的序号");
+    System.out.println("1为最左边的卡");
+    System.out.println(currentPlayer.getHand().size() + " 为最右边的卡");
   }
 
   public Card.Type playACard() {
-    System.out.println(currentPlayer.getName() + ", it's your round! Would you like to play a card? (Y/N)");
-    if (getAnswer().charAt(0) == 'Y') {
+    System.out.println(currentPlayer.getName() + ", 目前是你的回合，请问你是否需要打出卡牌（是／否）");
+    if (getAnswer().charAt(0) == '是') {
       instructions();
       String index = getAnswer();
       if (!(currentPlayer.check(index) == Card.Type.DODGE)) {
         return currentPlayer.play(getAnswer());
       } else {
-        System.out.println("Don't play a DODGE when you don't need to!");
-        System.out.println("Would you like to choose another card? (Y/N)");
+        System.out.println("请不要在不需要打出闪时出闪");
+        System.out.println("你需要打出其他的卡牌吗（是／否）);
         char again = getAnswer().charAt(0);
-        if (again == 'Y') {
+        if (again == '是') {
           playACard();
         }
         return null;
@@ -77,10 +77,10 @@ public class ThreeKingdoms {
       currentPlayer.play(getAnswer());
       return true;
     } else {
-      System.out.println("Please play a" + expected);
-      System.out.println("Would you like to choose another card? (Y/N)");
+      System.out.println("请打出一张" + expected);
+      System.out.println("你需要打出其他的卡牌吗（是／否）");
       char again = getAnswer().charAt(0);
-      if (again == 'Y') {
+      if (again == '是') {
         playACard(type);
       }
       return false;
@@ -88,7 +88,7 @@ public class ThreeKingdoms {
   }
 
   public boolean death() {
-    System.out.println(currentPlayer.getName() + "属于濒死状态");
+    System.out.println(currentPlayer.getName() + "处于濒死状态");
     changePlayer();
     System.out.println(currentPlayer.getName() + "你是否使用一个桃?");
     System.out.println("(1)--确定");
@@ -98,18 +98,18 @@ public class ThreeKingdoms {
       if (currentPlayer.hasCard(Card.Type.PEACH)){
         changePlayer();
         currentPlayer.heal();
-        System.out.println(currentPlayer.getName() + ", you are alive!");
+        System.out.println(currentPlayer.getName() + "脱离濒死状态");
         return false;
       } else {
-        System.out.println("Unfortunately, you do not have a PEACH.");
+        System.out.println("你没有桃");
         changePlayer();
-        System.out.println(currentPlayer.getName() + ", unfortunately, you are dead.");
+        System.out.println(currentPlayer.getName() + "死亡");
         changePlayer();
         return true;
       }
-      } else {
+    } else {
       changePlayer();
-      System.out.println(currentPlayer.getName() + ", unfortunately, you are dead.");
+      System.out.println(currentPlayer.getName() + "死亡");
       changePlayer();
       return true;
     }
@@ -126,14 +126,14 @@ public class ThreeKingdoms {
   public static void main(String[] args) {
     // start game
     ThreeKingdoms game = new ThreeKingdoms();
-    System.out.println("Welcome to the Three Kingdoms game!");
+    System.out.println("欢迎来到三国杀");
 
     // input names
-    System.out.println("Please enter the name of the first player: ");
+    System.out.println("请输入第一位玩家名字 ");
     game.player1.setName(getAnswer());
-    System.out.println("Thank you! Now please enter the name of the second player: ");
+    System.out.println("谢谢！请输入第二位玩家名字 ");
     game.player2.setName(getAnswer());
-    System.out.println("Alrighty! We shall start the game!");
+    System.out.println("游戏开始");
 
     // deal 4 cards to each player
     game.deck.shuffle();
@@ -154,9 +154,9 @@ public class ThreeKingdoms {
       if (card == Card.Type.KILL) {
         game.changePlayer();
         System.out.println("\n\n" +
-            game.currentPlayer.getName() +
-            ", the other player used a KILL towards you! Would you like to play a DODGE? (Y/N)");
-        if (getAnswer().charAt(0) == 'Y') {
+                game.currentPlayer.getName() +
+                ", 另一位玩家对您使用了一张杀，请问您是否打出一张闪（是／否）");
+        if (getAnswer().charAt(0) == '是') {
           if (!game.playACard("DODGE")) {
             game.currentPlayer.harm();
             if (game.currentPlayer.getHp() == 0) {
@@ -168,7 +168,7 @@ public class ThreeKingdoms {
             System.out.println("You've successfully dodged the KILL!");
           }
         } else {
-          System.out.println("You chose not to play a DODGE.");
+          System.out.println("你选择了不打出闪");
           game.currentPlayer.harm();
           if (game.currentPlayer.getHp() == 0) {
             if (game.death()) {
@@ -182,22 +182,22 @@ public class ThreeKingdoms {
         game.currentPlayer.heal();
         game.playACard();
       } else {
-        System.out.println(game.currentPlayer.getName() + ", you chose not to play a card.");
+        System.out.println(game.currentPlayer.getName() + "选择不打出卡牌");
       }
 
       // Discard cards
       while (game.currentPlayer.getHand().size() > game.currentPlayer.getHandLimit()) {
-        System.out.println(game.currentPlayer.getName() + ", you have " + game.currentPlayer.getHand().size() + " cards " +
-            "while the limit is " + game.currentPlayer.getHandLimit() + ", so please discard " +
-            (game.currentPlayer.getHand().size() - game.currentPlayer.getHandLimit()) + " cards.");
-        System.out.println("You currently have these cards: " + game.currentPlayer.getHand());
-        System.out.println("Please indicate the index of the card you wish to discard.");
+        System.out.println(game.currentPlayer.getName() + ", 你有 " + game.currentPlayer.getHand().size() + " 张卡牌 " +
+                "而手牌上限是 " + game.currentPlayer.getHandLimit() + ", 所以请弃置 " +
+                (game.currentPlayer.getHand().size() - game.currentPlayer.getHandLimit()) + " 张卡牌。");
+        System.out.println("你现在有卡牌 " + game.currentPlayer.getHand());
+        System.out.println("请选择你需要弃置的卡牌的序号");
         game.discard(Integer.parseInt(getAnswer()));
       }
       game.changePlayer();
     }
 
     // game over, ask if play again
-    System.out.println("Game Over!" + game.currentPlayer.getName() + ", congratulations, you won!");
+    System.out.println("游戏结束" + game.currentPlayer.getName() + "取得了胜利");
   }
 }
