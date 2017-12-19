@@ -1,3 +1,7 @@
+package src;
+
+import src.Card;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -57,7 +61,7 @@ public class ThreeKingdoms {
         return currentPlayer.play(getAnswer());
       } else {
         System.out.println("请不要在不需要打出闪时出闪");
-        System.out.println("你需要打出其他的卡牌吗（是／否）);
+        System.out.println("你需要打出其他的卡牌吗（是／否）");
         char again = getAnswer().charAt(0);
         if (again == '是') {
           playACard();
