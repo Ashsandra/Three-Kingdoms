@@ -1,36 +1,133 @@
-public class Card {
-  private Suit suit;
-  private int rank;
-  private Type type;
+public interface Card {
 
-  Card(Suit suit, int rank, Type type) {
-    this.suit = suit;
-    this.rank = rank;
-    this.type = type;
-  }
-
-  public enum Suit {
+  enum Suit {
     SPADE,
     HEART,
     DIAMOND,
-    CLUB;
+    CLUB
   }
 
-  public enum Type {
-    KILL,
-    DODGE,
-    PEACH;
+  /**
+   * Get the suit of the card.
+   * @return the suit of the card as in the enum Suit.
+   */
+  Suit getSuit();
+
+
+  /**
+   * Get the rank of the card.
+   * @return integer rank
+   */
+  int getRank();
+
+
+  /**
+   * Play a particular card. Do the appropriate changes to the game instance.
+   * @return the new game instance.
+   */
+  ThreeKingdoms play();
+
+
+
+  // 基本牌
+
+  class Kill implements Card {
+    Integer rank;
+    Suit suit;
+
+    private Kill(int rank, Suit suit) {
+      this.suit = suit;
+      this.rank = rank;
+    }
+
+    public Card makeKill(int rank, Suit suit) {
+      return new Kill(rank, suit);
+    }
+
+    @Override
+    public int getRank() {
+      return rank;
+    }
+
+    @Override
+    public Suit getSuit() {
+      return suit;
+    }
+
+
   }
 
-  public Suit getSuit() { return suit;}
+  class Dodge implements Card {
+    Integer rank;
+    Suit suit;
 
-  public int getRank() {return rank;}
+    private Dodge(int rank, Suit suit) {
+      this.suit = suit;
+      this.rank = rank;
+    }
 
-  public Type getType() {return type;}
+    public Card makeDodge(int rank, Suit suit) {
+      return new Dodge(rank, suit);
+    }
 
-  public boolean isRed() {return this.suit == Suit.SPADE | this.suit == Suit.CLUB;}
+    @Override
+    public int getRank() {
+      return rank;
+    }
 
-  public boolean isBlack() {return this.suit == Suit.HEART | this.suit == Suit.DIAMOND;}
+    @Override
+    public Suit getSuit() {
+      return suit;
+    }
 
-  public String toString() {return type.toString();}
+  }
+
+  class Peach implements Card {
+    Integer rank;
+    Suit suit;
+
+    private Peach(int rank, Suit suit) {
+      this.suit = suit;
+      this.rank = rank;
+    }
+
+    public Card makePeach(int rank, Suit suit) {
+      return new Dodge(rank, suit);
+    }
+
+    @Override
+    public int getRank() {
+      return rank;
+    }
+
+    @Override
+    public Suit getSuit() {
+      return suit;
+    }
+
+  }
+
+
+
+
+  interface Weapon extends Card {
+
+  }
+
+  interface Armor extends Card {
+
+  }
+
+  interface Horse extends Card {
+
+  }
+
+  interface Delay extends Card {
+
+  }
+
+  interface Undelay extends Card {
+
+  }
+
 }
