@@ -2,6 +2,8 @@ package game.deck;
 
 import java.util.ArrayList;
 import java.util.Collections;
+
+import game.ThreeKingdoms;
 import game.characters.Player;
 import game.deck.Basic.*;
 import game.deck.Armor.*;
@@ -46,11 +48,11 @@ public class DeckofCards {
     // Heart cards
     cards.add(new HailofArrows(1, HEART));
 
-    for (int rank : new int[] {2, 10, 11}) {)
+    for (int rank : new int[] {2, 10, 11}) {
       cards.add(new Attack(rank, HEART));
     }
 
-    for (int rank : new int[] {3, 4, 9}) {)
+    for (int rank : new int[] {3, 4, 9}) {
       cards.add(new Peach(rank, HEART));
     }
 
@@ -58,7 +60,7 @@ public class DeckofCards {
 
     cards.add(new Acedia(6, HEART));
 
-    for (int rank : new int[] {7, 8}) {)
+    for (int rank : new int[] {7, 8}) {
       cards.add(new SleightofHand(rank, HEART));
     }
 
@@ -115,17 +117,39 @@ public class DeckofCards {
   public DeckofCards makeNewDeck() {
     return new DeckofCards();
   }
-  
 
 
+  /**
+   * Counts the number of remaining cards in the deck.
+   * @return an integer <= 52.
+   */
+  public int count() {
+    return cards.size();
+  }
 
 
-
-
-
+  /**
+   * Shuffles the remaining cards inside the deck.
+   */
   public void shuffle() {
     Collections.shuffle(cards);
   }
+
+
+  /**
+   * Draws n cards from the deck to the player's hand.
+   * Cards drawn are deleted from the deck and added to the player's hand.
+   * @param n the number of cards the player draws
+   * @param player the player that draws the cards
+   * @return a new game instance with appropriate changes
+   */
+  public ThreeKingdoms draw(int n, Player player) {
+    //TODO: IMPLEMENT
+  }
+
+
+
+
 
   // all hand cards, or, lost cards
   // TO BE IMPROVED
