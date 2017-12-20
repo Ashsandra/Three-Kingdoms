@@ -63,17 +63,17 @@ public abstract class Card {
 }
 
 
-
+// 基本牌
 interface Basic {
 
-  class Kill extends Card implements Basic {
-    public Kill(int rank, Suit suit) {
+  class Attack extends Card implements Basic {
+    public Attack(int rank, Suit suit) {
       super(rank, suit);
     }
 
     @Override
     public ThreeKingdoms play() {
-      //TODO: IMPLEMENT FOR KILL
+      //TODO: IMPLEMENT FOR Attack
       throw new UnsupportedOperationException("The method or operation is not implemented");
     }
   }
@@ -107,8 +107,95 @@ interface Basic {
 }
 
 
+// 武器牌
 interface Weapon {
 
-  
+  /**
+   * Get the attack range of the weapon.
+   * @return an integer representing the range
+   */
+  int getAttackRange();
+
+
+  // 诸葛连弩
+  class ZhugeCrossbow extends Card implements Weapon {
+    public ZhugeCrossbow(int rank, Suit suit) {
+      super(rank, suit);
+    }
+
+    @Override
+    public int getAttackRange() {
+      return 1;
+    }
+
+    @Override
+    public ThreeKingdoms play() {
+      //TODO: IMPLEMENT FOR CROSSBOW
+      throw new UnsupportedOperationException("The method or operation is not implemented");
+    }
+  }
+
+
+  // 青釭剑
+  class SwordofBlueSteel extends Card implements Weapon {
+    public SwordofBlueSteel(int rank, Suit suit) {
+      super(rank, suit);
+    }
+
+    @Override
+    public int getAttackRange() {
+      return 2;
+    }
+
+    @Override
+    public ThreeKingdoms play() {
+      //TODO: IMPLEMENT
+      throw new UnsupportedOperationException("The method or operation is not implemented");
+    }
+  }
+
+
+  // 寒冰剑
+  class FrostBlade extends Card implements Weapon {
+    public FrostBlade(int rank, Suit suit) {
+      super(rank, suit);
+    }
+
+    @Override
+    public int getAttackRange() {
+      return 2;
+    }
+
+    @Override
+    public ThreeKingdoms play() {
+      //TODO: IMPLEMENT
+      throw new UnsupportedOperationException("The method or operation is not implemented");
+    }
+  }
+
+
+  // 贯石斧
+  class RockCleavingAxe extends Card implements Weapon {
+    public RockCleavingAxe(int rank, Suit suit) {
+      super(rank, suit);
+    }
+
+    @Override
+    public int getAttackRange() {
+      return 3;
+    }
+
+    @Override
+    public ThreeKingdoms play() {
+      //TODO: IMPLEMENT
+      throw new UnsupportedOperationException("The method or operation is not implemented");
+    }
+  }
+
+}
+
+
+// 防具牌
+interface Armor {
 
 }
