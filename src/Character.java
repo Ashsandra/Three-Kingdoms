@@ -1,3 +1,8 @@
+package src;
+
+import src.Card;
+import src.Player;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
