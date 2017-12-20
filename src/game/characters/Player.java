@@ -33,25 +33,25 @@ public class Player {
   }
 
   /**
-   * Get the name of the player's hero.
+   * Gets the name of the player's hero.
    * @return the hero's name
    */
   public String getName() {return name;}
 
   /**
-   * Get the maximum number of cards the player can hold.
+   * Gets the maximum number of cards the player can hold.
    * @return the maximum number of cards
    */
   public int getHandLimit() {return handLimit;}
 
   /**
-   * Get the player's current HP.
+   * Gets the player's current HP.
    * @return current HP
    */
   public int getHP() {return hp;}
 
   /**
-   * Update the player's current HP, either heal or harm.
+   * Updates the player's current HP, either heal or harm.
    * @param hpChange an integer, positive or negative, indicating the change in the player's current HP
    * @return a new player instance with updated HP
    */
@@ -60,7 +60,7 @@ public class Player {
   }
 
   /**
-   * Get the player's current hand of cards.
+   * Gets the player's current hand of cards.
    * @return the player's current hand as an arraylist
    */
   public ArrayList<Card> getHand() {
@@ -68,7 +68,7 @@ public class Player {
   }
 
   /**
-   * Update the player's current hand
+   * Updates the player's current hand
    * @param newHand an arraylist representing the player's updated hand
    * @return a new player instance with updated hand
    */
@@ -77,7 +77,7 @@ public class Player {
   }
 
   /**
-   * Get the player's current equipments.
+   * Gets the player's current equipments.
    * @return the player's equipments as an arraylist
    */
   public ArrayList<Card> getEquipment() {
@@ -85,7 +85,7 @@ public class Player {
   }
 
   /**
-   * Update the player's current Equipment field.
+   * Updates the player's current Equipment field.
    * @param newEquip an arraylist representing the player's updated equipments
    * @return a new player instance with updated equipments
    */
@@ -94,7 +94,7 @@ public class Player {
   }
 
   /**
-   * Get the cards in the player's Judge field.
+   * Gets the cards in the player's Judge field.
    * @return the judge cards as an arraylist
    */
   public ArrayList<Card> getJudge() {
@@ -102,7 +102,7 @@ public class Player {
   }
 
   /**
-   * Update the player's current Judge field.
+   * Updates the player's current Judge field.
    * @param newJudge an arraylist representing the player's updated judge cards
    * @return a new player instance with updated judge
    */
@@ -112,7 +112,7 @@ public class Player {
 
 
   /**
-   * Check whether the player's current HP is below (less than or equal to) 0.
+   * Checks whether the player's current HP is below (less than or equal to) 0.
    * If so, enter dying phase.
    * @return the current player if HP > 0, a new player instance with restored HP is HP = 0 and player has peach.
    * Otherwise end game.

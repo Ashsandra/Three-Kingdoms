@@ -15,7 +15,7 @@ import static game.deck.Card.Suit.*;
 public class DeckofCards {
   private ArrayList<Card> cards;
 
-  DeckofCards() {
+  private DeckofCards() {
     this.cards = new ArrayList<>();
 
 
@@ -109,13 +109,26 @@ public class DeckofCards {
     cards.add(new Peach(12, DIAMOND));
   }
 
+  private DeckofCards(ArrayList<Card> cards) {
+    this.cards = cards;
+  }
+
 
   /**
    * Constructs a new deck of 52 cards.
    * @return an instance of DeckofCard
    */
-  public DeckofCards makeNewDeck() {
-    return new DeckofCards();
+  public static DeckofCards makeNewDeck() {
+    return new DeckofCards().shuffle();
+  }
+
+
+  /**
+   * Gets all the cards in the deck.
+   * @return an arraylist of cards
+   */
+  public ArrayList<Card> getCards() {
+    return cards;
   }
 
 
@@ -130,9 +143,12 @@ public class DeckofCards {
 
   /**
    * Shuffles the remaining cards inside the deck.
+   * @return the shuffled deck
    */
-  public void shuffle() {
-    Collections.shuffle(cards);
+  public DeckofCards shuffle() {
+    ArrayList<Card> newCards = getCards();
+    Collections.shuffle(newCards);
+    return new DeckofCards(newCards);
   }
 
 
@@ -144,7 +160,18 @@ public class DeckofCards {
    * @return a new game instance with appropriate changes
    */
   public ThreeKingdoms draw(int n, Player player) {
-    //TODO: IMPLEMENT
+    int count = n;
+    ArrayList<Card> newCards = getCards();
+    ArrayList<Card> newHand = player.getHand();
+    while (count > 0) {
+      Card card = newCards.remove(0);
+      newHand.add(card);
+      count--;
+    }
+    player.updateHand(newHand);
+    new DeckofCards(newCards);
+    // TODO: IMPLEMENT (思考ThreeKingdoms的constructor, 需不需要一个currentPlayer? 怎样建新的game?)
+    throw new UnsupportedOperationException("Unimplemented.");
   }
 
 
@@ -152,7 +179,7 @@ public class DeckofCards {
 
 
   // all hand cards, or, lost cards
-  // TO BE IMPROVED
+  // TODO: IMPLEMENT
   public void deal(int cardNum, Player target, ArrayList<Card> discardedCards) {
     for (int num : new int[cardNum]) {
       target.getHand().add(cards.remove(0));
