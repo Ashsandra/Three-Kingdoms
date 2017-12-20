@@ -1,7 +1,6 @@
+package game.characters;
 
-
-import java.util.ArrayList;
-import java.util.Scanner;
+import game.deck.Card;
 
 public class Character {
     private int hp;

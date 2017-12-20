@@ -1,4 +1,8 @@
+package game;
 
+import game.deck.Card;
+import game.characters.Player;
+import game.deck.DeckofCards;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -6,18 +10,15 @@ import java.util.Scanner;
 import static java.nio.charset.StandardCharsets.UTF_8;
 
 public class ThreeKingdoms {
-  private Player currentPlayer;
-  private ArrayList<Card> discardedCards;
+  private ArrayList<Player> players;
   private DeckofCards deck;
-
-  private Player player1 = new Player(new Character(3, "Player 1"));
-  private Player player2 = new Player(new Character(3, "Player 2"));
+  private ArrayList<Card> discardedPile;
 
 
-  ThreeKingdoms() {
-    currentPlayer = player1;
-    discardedCards = new ArrayList<Card>();
-    deck = new DeckofCards();
+  ThreeKingdoms(ArrayList<Player> players) {
+    this.players = players;
+    this.discardedPile = new ArrayList<>();
+    this.deck = DeckofCards.makeNewDeck();
   }
 
   // used to read text from the user

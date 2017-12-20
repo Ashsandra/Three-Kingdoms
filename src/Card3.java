@@ -1,4 +1,5 @@
-
+import game.ThreeKingdoms;
+import game.deck.Card;
 
 public interface Card3 {
 
