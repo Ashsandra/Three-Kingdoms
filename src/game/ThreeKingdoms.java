@@ -1,4 +1,9 @@
+package game;
 
+import game.deck.Card;
+import game.characters.Character;
+import game.deck.DeckofCards;
+import game.characters.Player;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -10,8 +15,8 @@ public class ThreeKingdoms {
   private ArrayList<Card> discardedCards;
   private DeckofCards deck;
 
-  private Player player1 = new Player(new Character(3, "Player 1"));
-  private Player player2 = new Player(new Character(3, "Player 2"));
+  private Player player1 = new Player(new Character(3, "game.characters.Player 1"));
+  private Player player2 = new Player(new Character(3, "game.characters.Player 2"));
 
 
   ThreeKingdoms() {

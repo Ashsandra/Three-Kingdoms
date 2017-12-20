@@ -1,7 +1,10 @@
-
+package game.deck;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import Basic.*;
+import game.characters.Player;
+import ;
 
 public class DeckofCards {
   private ArrayList<Card> cards;
@@ -11,9 +14,9 @@ public class DeckofCards {
   DeckofCards() {
     this.cards = new ArrayList<Card>();
 
-    // Spade Kill
-    for (int rank : new int[] {7, 8, 8, 9, 9, 10, 10}) {
-      cards.add(new Card(Card.Suit.SPADE, rank, Card.Type.KILL));
+    // Spade Attack
+    for (int rank : new int[] {5, 7, 8, 10}) {
+      cards.add(new Attack(rank, SPADE));
     }
     // Club Kill
     for (int rank : new int[] {2, 3, 4, 5, 6, 7, 8, 8, 9, 9, 10, 10, 11, 11}) {

@@ -1,3 +1,7 @@
+package game.deck;
+
+import game.ThreeKingdoms;
+
 public abstract class Card {
   Integer rank;
   Suit suit;
@@ -7,7 +11,7 @@ public abstract class Card {
     this.rank = rank;
   }
 
-  enum Suit {
+  public enum Suit {
     SPADE,
     HEART,
     DIAMOND,

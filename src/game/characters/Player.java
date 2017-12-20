@@ -1,6 +1,7 @@
+package game.characters;
 
+import game.deck.Card;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Player {
