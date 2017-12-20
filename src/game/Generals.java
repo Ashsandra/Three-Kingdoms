@@ -1,4 +1,4 @@
-package src;
+package src.game;
 
 /**
  * Created by Ashsandra on 12/20/17.
