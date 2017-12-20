@@ -1,3 +1,6 @@
+
+package src;
+
 public interface Card {
 
   enum Suit {
