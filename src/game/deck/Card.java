@@ -70,6 +70,7 @@ public abstract class Card {
 // 基本牌
 interface Basic {
 
+  // 杀
   class Attack extends Card implements Basic {
     public Attack(int rank, Suit suit) {
       super(rank, suit);
@@ -83,6 +84,7 @@ interface Basic {
   }
 
 
+  // 闪
   class Dodge extends Card implements Basic {
     public Dodge(int rank, Suit suit) {
       super(rank, suit);
@@ -96,6 +98,7 @@ interface Basic {
   }
 
 
+  // 桃
   class Peach extends Card implements Basic {
     public Peach(int rank, Suit suit) {
       super(rank, suit);
