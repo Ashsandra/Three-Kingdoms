@@ -1,6 +1,4 @@
-package src;
 
-import src.Card;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -8,7 +6,7 @@ import java.util.Collections;
 public class DeckofCards {
   private ArrayList<Card> cards;
 
-  // TO-DO: perhaps use linked list instead.
+  // TODO: perhaps use linked list instead.
 
   DeckofCards() {
     this.cards = new ArrayList<Card>();

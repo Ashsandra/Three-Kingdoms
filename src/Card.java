@@ -1,7 +1,11 @@
+public abstract class Card {
+  Integer rank;
+  Suit suit;
 
-package src;
-
-public interface Card {
+  Card(int rank, Suit suit) {
+    this.suit = suit;
+    this.rank = rank;
+  }
 
   enum Suit {
     SPADE,
@@ -14,124 +18,97 @@ public interface Card {
    * Get the suit of the card.
    * @return the suit of the card as in the enum Suit.
    */
-  Suit getSuit();
+  public Suit getSuit() {
+    return suit;
+  }
 
 
   /**
    * Get the rank of the card.
    * @return integer rank
    */
-  int getRank();
+  public int getRank() {
+    return rank;
+  }
 
 
   /**
    * Play a particular card. Do the appropriate changes to the game instance.
    * @return the new game instance.
    */
-  ThreeKingdoms play();
+  abstract ThreeKingdoms play();
+
+
+  /**
+   * Check whether the card is of black color (spade/club).
+   * @return a boolean
+   */
+  public boolean isBlack() {
+    return getSuit().equals(Suit.CLUB) || getSuit().equals(Suit.SPADE);
+  }
+
+  /**
+   * Check whether the card is of red color (heart/diamond).
+   * @return a boolean
+   */
+  public boolean isRed() {
+    return getSuit().equals(Suit.DIAMOND) || getSuit().equals(Suit.HEART);
+  }
+
+
+  public boolean isBasic() {
+    //TODO: do I need this method?
+    return this instanceof Basic;
+  }
+}
 
 
 
-  // 基本牌
+interface Basic {
 
-  class Kill implements Card {
-    Integer rank;
-    Suit suit;
-
-    private Kill(int rank, Suit suit) {
-      this.suit = suit;
-      this.rank = rank;
-    }
-
-    public Card makeKill(int rank, Suit suit) {
-      return new Kill(rank, suit);
+  class Kill extends Card implements Basic {
+    public Kill(int rank, Suit suit) {
+      super(rank, suit);
     }
 
     @Override
-    public int getRank() {
-      return rank;
+    public ThreeKingdoms play() {
+      //TODO: IMPLEMENT FOR KILL
+      throw new UnsupportedOperationException("The method or operation is not implemented");
+    }
+  }
+
+
+  class Dodge extends Card implements Basic {
+    public Dodge(int rank, Suit suit) {
+      super(rank, suit);
     }
 
     @Override
-    public Suit getSuit() {
-      return suit;
+    public ThreeKingdoms play() {
+      //TODO: IMPLEMENT FOR DODGE
+      throw new UnsupportedOperationException("The method or operation is not implemented");
     }
-
-
   }
 
-  class Dodge implements Card {
-    Integer rank;
-    Suit suit;
 
-    private Dodge(int rank, Suit suit) {
-      this.suit = suit;
-      this.rank = rank;
-    }
-
-    public Card makeDodge(int rank, Suit suit) {
-      return new Dodge(rank, suit);
+  class Peach extends Card implements Basic {
+    public Peach(int rank, Suit suit) {
+      super(rank, suit);
     }
 
     @Override
-    public int getRank() {
-      return rank;
+    public ThreeKingdoms play() {
+      //TODO: IMPLEMENT FOR PEACH
+      throw new UnsupportedOperationException("The method or operation is not implemented");
     }
-
-    @Override
-    public Suit getSuit() {
-      return suit;
-    }
-
   }
 
-  class Peach implements Card {
-    Integer rank;
-    Suit suit;
-
-    private Peach(int rank, Suit suit) {
-      this.suit = suit;
-      this.rank = rank;
-    }
-
-    public Card makePeach(int rank, Suit suit) {
-      return new Dodge(rank, suit);
-    }
-
-    @Override
-    public int getRank() {
-      return rank;
-    }
-
-    @Override
-    public Suit getSuit() {
-      return suit;
-    }
-    aaaa
-
-  }
+}
 
 
+interface Weapon {
 
-
-  interface Weapon extends Card {
-
-  }
-
-  interface Armor extends Card {
-
-  }
-
-  interface Horse extends Card {
-
-  }
-
-  interface Delay extends Card {
-
-  }
-
-  interface Undelay extends Card {
-
-  }
+  
 
 }
