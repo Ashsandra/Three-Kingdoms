@@ -7,14 +7,11 @@ public abstract class Generals {
     Integer maxHp;
     Integer gender;
 
-    Generals () {
-
-    }
-
     Generals (int maxHp, int gender){
         this.maxHp = maxHp;
         this.gender = gender;
     }
+
     public int getMaxHp() {
         return maxHp;
     }

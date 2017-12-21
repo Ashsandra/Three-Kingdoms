@@ -14,9 +14,11 @@ import static game.deck.Card.Suit.*;
 
 public class DeckofCards {
   private ArrayList<Card> cards;
+  private ArrayList<Card> discardedPile;
 
   private DeckofCards() {
     this.cards = new ArrayList<>();
+    this.discardedPile = new ArrayList<>();
 
 
     // Spade cards
@@ -82,7 +84,7 @@ public class DeckofCards {
       cards.add(new Attack(rank, CLUB));
     }
 
-    cards.add(new SevenArmies(7, CLUB));
+    cards.add(new Drowning(7, CLUB));
 
     cards.add(new RationsDepleted(12, CLUB));
 
@@ -109,8 +111,9 @@ public class DeckofCards {
     cards.add(new Peach(12, DIAMOND));
   }
 
-  private DeckofCards(ArrayList<Card> cards) {
+  public DeckofCards(ArrayList<Card> cards, ArrayList<Card> discardedPile) {
     this.cards = cards;
+    this.discardedPile = discardedPile;
   }
 
 
@@ -133,6 +136,15 @@ public class DeckofCards {
 
 
   /**
+   * Gets all the cards in the discarded pile.
+   * @return an arraylist of discarded cards
+   */
+  public ArrayList<Card> getDiscardedPile() {
+    return discardedPile;
+  }
+
+
+  /**
    * Counts the number of remaining cards in the deck.
    * @return an integer <= 52.
    */
@@ -148,45 +160,8 @@ public class DeckofCards {
   public DeckofCards shuffle() {
     ArrayList<Card> newCards = getCards();
     Collections.shuffle(newCards);
-    return new DeckofCards(newCards);
+    return new DeckofCards(newCards, getDiscardedPile());
   }
-
-
-  /**
-   * Draws n cards from the deck to the player's hand.
-   * Cards drawn are deleted from the deck and added to the player's hand.
-   * @param n the number of cards the player draws
-   * @param player the player that draws the cards
-   * @return a new game instance with appropriate changes
-   */
-  public ThreeKingdoms draw(int n, Player player) {
-    int count = n;
-    ArrayList<Card> newCards = getCards();
-    ArrayList<Card> newHand = player.getHand();
-    while (count > 0) {
-      Card card = newCards.remove(0);
-      newHand.add(card);
-      count--;
-    }
-    player.updateHand(newHand);
-    new DeckofCards(newCards);
-    // TODO: IMPLEMENT (思考ThreeKingdoms的constructor, 需不需要一个currentPlayer? 怎样建新的game?)
-    throw new UnsupportedOperationException("Unimplemented.");
-  }
-
-
-
-
-
-  // all hand cards, or, lost cards
-  // TODO: IMPLEMENT
-  public void deal(int cardNum, Player target, ArrayList<Card> discardedCards) {
-    for (int num : new int[cardNum]) {
-      target.getHand().add(cards.remove(0));
-      if (cards.size() == 0) {
-        cards = discardedCards;
-        this.shuffle();
-      }
-    }
-  }
+  
 }
+
