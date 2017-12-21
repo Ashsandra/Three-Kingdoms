@@ -162,6 +162,6 @@ public class DeckofCards {
     Collections.shuffle(newCards);
     return new DeckofCards(newCards, getDiscardedPile());
   }
-  
+
 }
 
