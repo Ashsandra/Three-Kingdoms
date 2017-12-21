@@ -10,39 +10,41 @@ import java.util.Scanner;
 import static java.nio.charset.StandardCharsets.UTF_8;
 
 public class ThreeKingdoms {
-  private ArrayList<Player> players;
+  private Player me;
+  private Player opponent;
   private DeckofCards deck;
   private ArrayList<Card> discardedPile;
 
 
-  ThreeKingdoms(ArrayList<Player> players) {
-    this.players = players;
+  ThreeKingdoms(Player me, Player opponent) {
+    this.me = me;
+    this.opponent = opponent;
     this.discardedPile = new ArrayList<>();
     this.deck = DeckofCards.makeNewDeck();
   }
-
-  // used to read text from the user
-  private static Scanner cin = new Scanner(System.in, UTF_8.name());
-
-  public static String getAnswer() {
-    return cin.nextLine();
-  }
-
-  public void changePlayer() {
-    if (currentPlayer == player1) {
-      currentPlayer = player2;
-    } else {
-      currentPlayer = player1;
-    }
-  }
-
-  public void draw(int numofCards) {
-    deck.deal(numofCards, currentPlayer, discardedCards);
-    System.out.println("你好， " +
-            currentPlayer.getName() +
-            ", 你目前的手牌为 " +
-            currentPlayer.getHand());
-  }
+//
+//  // used to read text from the user
+//  private static Scanner cin = new Scanner(System.in, UTF_8.name());
+//
+//  public static String getAnswer() {
+//    return cin.nextLine();
+//  }
+//
+//  public void changePlayer() {
+//    if (currentPlayer == player1) {
+//      currentPlayer = player2;
+//    } else {
+//      currentPlayer = player1;
+//    }
+//  }
+//
+//  public void draw(int n) {
+//    deck.d(numofCards, currentPlayer, discardedCards);
+//    System.out.println("你好， " +
+//            currentPlayer.getName() +
+//            ", 你目前的手牌为 " +
+//            currentPlayer.getHand());
+//  }
 
   private void instructions() {
     System.out.println(currentPlayer.getName() + ", 你目前的手牌为 " + currentPlayer.getHand());
