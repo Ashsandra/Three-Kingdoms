@@ -361,8 +361,8 @@ interface Tactics {
 
 
   // 水淹七军
-  class SevenArmies extends Card implements Tactics {
-    public SevenArmies(int rank, Suit suit) {
+  class Drowning extends Card implements Tactics {
+    public Drowning(int rank, Suit suit) {
       super(rank, suit);
     }
 
