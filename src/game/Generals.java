@@ -1,294 +1,183 @@
 package src.game;
 
+import static src.game.Generals.Gender.FEMALE;
+import static src.game.Generals.Gender.MALE;
+import static src.game.Generals.Nationality.*;
+
 /**
  * Created by Ashsandra on 12/20/17.
  */
 public abstract class Generals {
     Integer maxHp;
-    Integer gender;
+    Gender gender;
+    Nationality nationality;
 
-    Generals (int maxHp, int gender){
+    enum Nationality {
+        WEI,
+        SHU,
+        WU,
+        QUN
+    }
+
+    enum Gender {
+        FEMALE,
+        MALE
+    }
+
+    Generals (int maxHp, Gender gender, Nationality nationality){
         this.maxHp = maxHp;
         this.gender = gender;
+        this.nationality = nationality;
     }
 
-    public int getMaxHp() {
-        return maxHp;
-    }
 
-    public int getGender () {
-        return gender;
-    }
 
 }
 
 class yueYing extends Generals {
-    @Override
-    public int getMaxHp() {
-        return 3;
-    }
+    public yueYing () {
+        super(3, FEMALE,SHU);
+        }
 
-    @Override
-    public int getGender() {
-        return 1;
-    }
+
+
 }
 
 class guanYu extends Generals {
-    @Override
-    public int getMaxHp() {
-        return 4;
-    }
-    @Override
-    public int getGender() {
-        return 0;
+    public guanYu () {
+        super(4,MALE,SHU);
     }
 }
 
 class zhangFei extends Generals {
-    @Override
-    public int getMaxHp() {
-        return 4;
-    }
-    @Override
-    public int getGender() {
-        return 0;
+    public zhangFei () {
+        super (4,MALE,SHU);
     }
 
 }
 
 class zhugeLiang extends Generals {
-    @Override
-    public int getMaxHp() {
-        return 3;
+    public zhugeLiang () {
+        super (3, MALE, SHU);
     }
-    @Override
-    public int getGender() {
-        return 0;
-    }
-
 }
 
 class liuBei extends Generals {
-    @Override
-    public int getMaxHp() {
-        return 4;
-    }
-    @Override
-    public int getGender() {
-        return 0;
+    public liuBei () {
+        super (4, MALE,SHU);
     }
 
 }
 
 class maChao extends Generals {
-        @Override
-        public int getMaxHp() {
-            return 4;
+        public maChao () {
+            super(4,MALE,SHU);
         }
-    @Override
-    public int getGender() {
-        return 0;
-    }
-
 }
 
 class zhaoYun extends Generals {
-    @Override
-    public int getMaxHp() {
-        return 4;
+    public zhaoYun (){
+        super (4, MALE,SHU);
     }
-    @Override
-    public int getGender() {
-        return 0;
-    }
-
 }
 
 class sunQuan extends Generals {
-    @Override
-    public int getMaxHp() {
-        return 4;
-    }
-    @Override
-    public int getGender() {
-        return 0;
-    }
-
+     public sunQuan () {
+         super(4,MALE,WU);
+     }
 }
 
 class sunShangXiang extends Generals {
-    @Override
-    public int getMaxHp() {
-        return 3;
+    public sunShangXiang(){
+        super(3,FEMALE,WU);
     }
-    @Override
-    public int getGender() {
-        return 1;
-    }
-
 }
 
 class ganNing extends Generals {
-    @Override
-    public int getMaxHp() {
-        return 4;
-    }
-    @Override
-    public int getGender() {
-        return 0;
+    public ganNing () {
+        super(4,MALE,WU);
     }
 
 }
 
 class huangGai extends Generals {
-    @Override
-    public int getMaxHp() {
-        return 4;
+    public huangGai () {
+        super(4,MALE,WU);
     }
-    @Override
-    public int getGender() {
-        return 0;
-    }
-
 }
 
 class luXun extends Generals {
-    @Override
-    public int getMaxHp() {
-        return 3;
+    public luXun () {
+        super(4,MALE,WU);
     }
-    @Override
-    public int getGender() {
-        return 0;
-    }
-
 }
 
 class lvMeng extends Generals {
-    @Override
-    public int getMaxHp() {
-        return 4;
+    public lvMeng () {
+        super(4,MALE,WU);
     }
-    @Override
-    public int getGender() {
-        return 0;
-    }
-
 }
 
 class zhouYu extends Generals {
-    @Override
-    public int getMaxHp() {
-        return 3;
+    public zhouYu () {
+        super(3,MALE,WU);
     }
-
 }
 
 class guoJia extends Generals {
-    @Override
-    public int getMaxHp() {
-        return 3;
-    }
-    @Override
-    public int getGender() {
-        return 0;
+    public guoJia () {
+        super(3,MALE,WEI);
     }
 
 }
 
 class zhenJi extends Generals {
-    @Override
-    public int getMaxHp() {
-        return 3;
+    public zhenJi () {
+        super(3,FEMALE,WEI);
     }
-    @Override
-    public int getGender() {
-        return 1;
-    }
-
 }
 
 class caoCao extends Generals {
-    @Override
-    public int getMaxHp() {
-        return 4;
-    }
-    @Override
-    public int getGender() {
-        return 0;
+    public caoCao () {
+        super (4,MALE,WEI);
     }
 
 }
 
 class siMaYi extends Generals {
-    @Override
-    public int getMaxHp() {
-        return 3;
+    public siMaYi() {
+        super(3,MALE,WEI);
     }
-    @Override
-    public int getGender() {
-        return 0;
-    }
-
 }
 
 class xiaHouDun extends Generals {
-    @Override
-    public int getMaxHp() {
-        return 4;
-    }
-    @Override
-    public int getGender() {
-        return 0;
+    public xiaHouDun() {
+        super(4,MALE,WEI);
     }
 
 }
 
 class zhangLiao extends Generals {
-    @Override
-    public int getMaxHp() {
-        return 4;
+    public zhangLiao(){
+        super(4,MALE,WEI);
     }
-    @Override
-    public int getGender() {
-        return 0;
-    }
-
 }
 
 class xuChu extends Generals {
-    @Override
-    public int getMaxHp() {
-        return 4;
-    }
-    @Override
-    public int getGender() {
-        return 0;
+    public xuChu(){
+        super(4,MALE,WEI);
     }
 
 }
 
 class lvBu extends Generals {
-    @Override
-    public int getMaxHp() {
-        return 4;
+    public lvBu(){
+        super(4,MALE,QUN);
     }
-    @Override
-    public int getGender() {
-        return 0;
-    }
-
 }
 
 class diaoChan extends Generals {
-    @Override
-    public int getMaxHp() {
-        return 3;
+    public diaoChan(){
+        super(3,FEMALE,QUN);
     }
-    @Override
-    public int getGender() {
-        return 1;
-    }
-
 }
