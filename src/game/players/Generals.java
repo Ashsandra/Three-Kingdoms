@@ -1,8 +1,8 @@
-package src.game;
+package game.players;
 
-import static src.game.Generals.Gender.FEMALE;
-import static src.game.Generals.Gender.MALE;
-import static src.game.Generals.Nationality.*;
+import static game.players.Generals.Gender.FEMALE;
+import static game.players.Generals.Gender.MALE;
+import static game.players.Generals.Nationality.*;
 
 /**
  * Created by Ashsandra on 12/20/17.
@@ -37,10 +37,7 @@ public abstract class Generals {
 class yueYing extends Generals {
     public yueYing () {
         super(3, FEMALE,SHU);
-        }
-
-
-
+    }
 }
 
 class guanYu extends Generals {
@@ -70,9 +67,9 @@ class liuBei extends Generals {
 }
 
 class maChao extends Generals {
-        public maChao () {
-            super(4,MALE,SHU);
-        }
+    public maChao () {
+        super(4,MALE,SHU);
+    }
 }
 
 class zhaoYun extends Generals {
@@ -82,9 +79,9 @@ class zhaoYun extends Generals {
 }
 
 class sunQuan extends Generals {
-     public sunQuan () {
-         super(4,MALE,WU);
-     }
+    public sunQuan () {
+        super(4,MALE,WU);
+    }
 }
 
 class sunShangXiang extends Generals {

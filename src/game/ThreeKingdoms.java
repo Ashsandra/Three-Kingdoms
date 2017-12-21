@@ -1,13 +1,10 @@
 package game;
 
 import game.deck.Card;
-import game.characters.Player;
+import game.players.Player;
 import game.deck.DeckofCards;
 
 import java.util.ArrayList;
-import java.util.Scanner;
-
-import static java.nio.charset.StandardCharsets.UTF_8;
 
 /**
  * The main game instance

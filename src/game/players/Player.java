@@ -1,6 +1,5 @@
-package game.characters;
+package game.players;
 
-import game.ThreeKingdoms;
 import game.deck.Card;
 import java.util.ArrayList;
 
