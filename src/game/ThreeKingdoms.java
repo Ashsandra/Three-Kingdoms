@@ -1,24 +1,26 @@
-package game;
+package src;
 
-import game.deck.Card;
-import game.characters.Player;
-import game.deck.DeckofCards;
+import src.DeckofCards;
 
+import javax.smartcardio.Card;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 
 public class ThreeKingdoms {
-  private ArrayList<Player> players;
+  private Player currentPlayer;
+  private ArrayList<Card> discardedCards;
   private DeckofCards deck;
-  private ArrayList<Card> discardedPile;
+
+  private Player player1 = new Player(new Character(3, "Player 1"));
+  private Player player2 = new Player(new Character(3, "Player 2"));
 
 
-  ThreeKingdoms(ArrayList<Player> players) {
-    this.players = players;
-    this.discardedPile = new ArrayList<>();
-    this.deck = DeckofCards.makeNewDeck();
+  ThreeKingdoms() {
+    currentPlayer = player1;
+    discardedCards = new ArrayList<Card>();
+    deck = new DeckofCards();
   }
 
   // used to read text from the user
@@ -151,7 +153,7 @@ public class ThreeKingdoms {
       game.draw(2);
 
       // play a card
-      Card.Type card = game.playACard();
+      Card.Type.card = game.playACard();
 
       // kill
       if (card == Card.Type.KILL) {

@@ -1,5 +1,6 @@
-import game.ThreeKingdoms;
-import game.deck.Card;
+package src;
+
+import javax.smartcardio.Card;
 
 public interface Card3 {
 
