@@ -1,10 +1,12 @@
 package game.players;
 
 import game.deck.Card;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 
 
-public class Player {
+public class Player implements Serializable {
   private String name;
   private int hp;
   private int handLimit;

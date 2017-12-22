@@ -3,8 +3,6 @@ package game.deck;
 import java.util.ArrayList;
 import java.util.Collections;
 
-import game.ThreeKingdoms;
-import game.characters.Player;
 import game.deck.Basic.*;
 import game.deck.Armor.*;
 import game.deck.Weapon.*;
