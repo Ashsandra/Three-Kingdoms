@@ -7,7 +7,7 @@ import game.deck.DeckofCards;
 import java.util.ArrayList;
 
 /**
- * The main game instance
+ * The main game instance.
  */
 public class ThreeKingdoms {
   private Player me;

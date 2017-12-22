@@ -2,7 +2,9 @@ package game.deck;
 
 import game.ThreeKingdoms;
 
-public abstract class Card {
+import java.io.Serializable;
+
+public abstract class Card implements Serializable {
   Integer rank;
   Suit suit;
 
